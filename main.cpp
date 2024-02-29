@@ -18,6 +18,7 @@ int main()
 
     SetTargetFPS(60);
 
+
     // Main game loop
     while (!WindowShouldClose())
     {

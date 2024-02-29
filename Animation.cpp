@@ -10,6 +10,7 @@ AnimatedSprite::AnimatedSprite(const char* filename, int spriteWidth, int sprite
     currentFrame = 0;
 }
 
+
 void AnimatedSprite::Update(float deltaTime)
 {
     frameTime -= deltaTime;
