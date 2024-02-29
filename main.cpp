@@ -1,29 +1,28 @@
-#include <iostream>
-#include <raylib.h>
+#include "raylib.h"
+#include "Animation.h"
 using namespace std;
 
-
 typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay, Ending} GAMESCREEN;
-int main () {
-
-    //Screen Settings
+int main()
+{
+    // Initialization
     const int screenWidth = 1080;
     const int screenHeight = 720;
+
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
     SetTargetFPS(60);
     GAMESCREEN currentScreen = Logo;
-     int framesCounter = 0;
-    /**************************      USED FOR TITLE SCREEN ANIMATION        **************************************************/
-    
+    int framesCounter = 0;
+    // Create an instance of AnimatedSprite
+    AnimatedSprite mySprite("resources/bg/Main.png", 1080, 720, 15, 0.2f);
 
-    /**************************      USED FOR LOGO SCREEN ANIMATION        **************************************************/            
-
-   
-   
     SetTargetFPS(60);
-    while (!WindowShouldClose()) //checks if the user clicks the close button
-    {   
-        /********        This handles the switching of the screen           *******/
+
+
+    // Main game loop
+    while (!WindowShouldClose())
+    {
+        
         switch(currentScreen)
         {
             case Logo:
@@ -41,7 +40,9 @@ int main () {
             case Title:
             {
                 // TODO: Update TITLE screen variables here!
-
+                
+                float deltaTime = GetFrameTime();
+                mySprite.UpdatePro(deltaTime, 13);
                 // Press enter to change to GAMEPLAY screen
                 if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
                 {
@@ -91,9 +92,8 @@ int main () {
                 case Title:
                 {
                     // TODO: Draw TITLE screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, GREEN);
-                    DrawText("TITLE SCREEN", 20, 20, 40, DARKGREEN);
-                    DrawText("PRESS ENTER or TAP to JUMP to GAMEPLAY SCREEN", 120, 220, 20, DARKGREEN);
+                    mySprite.Draw();
+                    
 
                 } break;
                 case Gameplay:
@@ -114,10 +114,12 @@ int main () {
                 } break;
                 default: break;
             }
-
         EndDrawing();
-        //----------------------------------------------------------------------------------
     }
-    CloseWindow();
+
+    // De-Initialization
+    UnloadTexture(mySprite.spriteSheet);  // Unload texture
+    CloseWindow();  // Close window and OpenGL context
+
     return 0;
 }
