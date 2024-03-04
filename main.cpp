@@ -153,9 +153,14 @@ int main()
                     Rectangle roundedRect = { (screenWidth - 980) / 2, (screenHeight - 700) / 2, 980, 700 };
                     DrawRectangleRounded(roundedRect, 0.1, 10, transparentBlack);
                     
-                    DrawText("GAMEPLAY Language", 40, 20, 40, MAROON);
-                    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
                     
+
+                    //button
+                    Rectangle buttonRect1 = { 344, 293, 764, 219 };
+                    Color buttonColor2 = BLACK;
+                    DrawRectangleRounded(buttonRect1, 0.4 , 10, buttonColor2);
+                    DrawText("BEGINNER LEVEL!", 378 , 368, 76 , WHITE);
+
             
 
                 } break;
