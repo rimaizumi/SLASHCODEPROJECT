@@ -12,8 +12,10 @@ public:
 
     AnimatedSprite(const char* filename, int spriteWidth, int spriteHeight, int frames, float animationSpeed);
     //void update is for looped animation
+
     void Update(float deltaTime);
     //void updatepro is for controlled animation
-    void UpdatePro(float deltaTime, int limitofFrames);
+
+    void UpdatePro(float deltaTime, int limitofFrames); //limit of frames to reach 
     void Draw();
 };
