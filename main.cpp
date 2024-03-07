@@ -1,23 +1,31 @@
 #include "raylib.h"
 #include "Animation.h"
+#include "GameDesign.h"
+#include "Question.h"
+#include <iostream>
 using namespace std;
 
-typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay, Ending} GAMESCREEN;
+typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
 int main()
 {
     // Initialization
-    const int screenWidth = 1080;
-    const int screenHeight = 720;
+    const int screenWidth = 1440;
+    const int screenHeight = 1024;
+    string userInput = "";
+    SettingsButton settingsButton;
+    Question questionInstance;
+    
+    
 
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
     SetTargetFPS(60);
     GAMESCREEN currentScreen = Logo;
     int framesCounter = 0;
     // Create an instance of AnimatedSprite
-    AnimatedSprite mySprite("resources/bg/Main.png", 1080, 720, 15, 0.2f);
+    AnimatedSprite mySprite("resources/bg/Main.png", 1440, 1024, 15, 0.2f);
 
     SetTargetFPS(60);
-
+    
 
     // Main game loop
     while (!WindowShouldClose())
@@ -53,13 +61,49 @@ int main()
             {
                 // TODO: Update GAMEPLAY screen variables here!
 
-
                 // Press enter to change to ENDING screen
-                if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
-                {
-                    currentScreen = Ending;
+            Rectangle collision_position = { 344, 293, 764, 219 };
+                
+             if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
+                 // isSettingOpen1 prevent the Beginner button to be press pag nasa setting mode
+                if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {          
+                    currentScreen = Game_language;
                 }
+            } 
+
+                settingsButton.Update();
+               
             } break;
+
+             case Game_language:
+            {
+                // TODO: Update GAME_language screen variables here!
+
+                Rectangle collision_position = { 344, 293, 764, 219 };
+                
+                if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
+                    
+                    // isSettingOpen1 prevent the python button to be press pag nasa setting mode
+                    if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                        
+                        currentScreen = slashcode;
+                    }
+                } 
+
+                settingsButton.Update();
+            } break;
+
+
+            case slashcode:{
+              if (IsKeyPressed(KEY_ENTER))
+            {
+                currentScreen = Ending;
+            }
+            }break;
+            questionInstance.Update();
+            questionInstance.checkQuestionAndAnswer();
+            
+
             case Ending:
             {
                 // TODO: Update ENDING screen variables here!
@@ -99,11 +143,31 @@ int main()
                 case Gameplay:
                 {
                     // TODO: Draw GAMEPLAY screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight, PURPLE);
-                    DrawText("GAMEPLAY SCREEN", 20, 20, 40, MAROON);
-                    DrawText("PRESS ENTER or TAP to JUMP to ENDING SCREEN", 130, 220, 20, MAROON);
+                    //background
+                    DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+                    settingsButton.Draw();
+                    settingsButton.DrawSetting();
+       
+                } break;
+
+                 case Game_language:
+                {
+                    // TODO: Draw GAMEPLAY screen here!
+                    DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+                    settingsButton.Drawlanguage();
+                    settingsButton.DrawSetting(); 
 
                 } break;
+
+                case slashcode:{
+    
+                    settingsButton.DrawSlashcode();
+                    questionInstance.drawTextBox();
+                    questionInstance.drawUserInput();
+                    questionInstance.drawResultBox();
+
+                }break;
+
                 case Ending:
                 {
                     // TODO: Draw ENDING screen here!
@@ -118,6 +182,7 @@ int main()
     }
 
     // De-Initialization
+
     UnloadTexture(mySprite.spriteSheet);  // Unload texture
     CloseWindow();  // Close window and OpenGL context
 
