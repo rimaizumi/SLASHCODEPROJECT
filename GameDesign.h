@@ -19,13 +19,12 @@ private:
     // variables
 
     // design
-
     Rectangle roundedRect;
     Rectangle buttonRect1;
-    bool isSettingsOpen;
     //setting button
+    bool isSettingsOpen;
     Rectangle settingsButton;
-    bool isjourneypressed;
+    bool temporaryUnavailable;
     Rectangle journey;
     Rectangle backcolor;
     Rectangle journeyButton;

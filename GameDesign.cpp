@@ -1,22 +1,25 @@
 #include "GameDesign.h"
-typedef enum GAMESCREEN { Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
-GAMESCREEN currentScreen = Gameplay;
 // constractor
 SettingsButton::SettingsButton() {
     // initialize
-    //design
     roundedRect = { (1440 - 1002) / 2, (1024 - 983) / 2, 1002, 983 };
     buttonRect1 = { 344, 293, 764, 219 };
-    //setting button
+
     settingsButton = { 20, 20, 30, 30 };
+    // bool for the setting
     isSettingsOpen = false;
+
+    // bool to prevent the beginner and python button pag nasa settings
     isSettingsOpen1 = true;
-    isjourneypressed = false;
+
+    //bool for temporary unavaillable features
+    temporaryUnavailable = false;
+
+    // initialize
     Xshape = { 35, 35, 30, 5 };
     Xshape1 = { 510, 242, 30, 5 };
     Xshape1_Collision = { 495, 230, 30, 30 };
     
-
     backcolor = { 10, 10, 330, 270};
     journey = { 480, 212, 500, 500};
     journeyButton = { settingsButton.x + 50, settingsButton.y + 50, 210, 55 };
@@ -36,14 +39,14 @@ void SettingsButton::Update() {
             isSettingsOpen1 = !isSettingsOpen1;
         } else if (isSettingsOpen && CheckCollisionPointRec(mousePos, journeyButton)) {
             // Handle Journey button click
-            isjourneypressed = !isjourneypressed;
+            temporaryUnavailable = !temporaryUnavailable;
             
         } else if (isSettingsOpen && CheckCollisionPointRec(mousePos, rankingButton)) {
             // Handle Ranking button click
-            isjourneypressed = !isjourneypressed;
+            temporaryUnavailable = !temporaryUnavailable;
         }
-        else if (isjourneypressed && CheckCollisionPointRec(mousePos, Xshape1_Collision)) {
-            isjourneypressed = !isjourneypressed;
+        else if (temporaryUnavailable && CheckCollisionPointRec(mousePos, Xshape1_Collision)) {
+            temporaryUnavailable = !temporaryUnavailable;
         }
         
     }
@@ -83,7 +86,7 @@ void SettingsButton::DrawSetting(){
         DrawText("Ranking", rankingButton.x + 10, rankingButton.y + 10, 44, BLACK);
         DrawRectangle(settingsButton.x,rankingButton.y+60 , 310,2,BLACK);
 
-        if(isjourneypressed){
+        if(temporaryUnavailable){
             DrawRectangleRounded(journey, 0.1, 10 , WHITE);
             DrawText("This feature is", journey.x + 65, journey.y + 166, 32 , BLACK);
             DrawText("Temporary Unavailable", journey.x + 65, journey.y + 200, 32 , BLACK);
