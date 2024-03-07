@@ -12,7 +12,7 @@ public:
     void DrawSetting();
     void Drawlanguage();
     void DrawSlashcode();
-    Texture2D x_button;
+  
     
 
 private:
@@ -29,4 +29,5 @@ private:
     Rectangle backcolor;
     Rectangle journeyButton;
     Rectangle rankingButton;
+    Rectangle Xshape;
 };

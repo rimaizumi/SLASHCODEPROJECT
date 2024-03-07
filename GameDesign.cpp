@@ -9,9 +9,10 @@ SettingsButton::SettingsButton() {
     //setting button
     settingsButton = { 20, 20, 30, 30 };
     isSettingsOpen = false;
+    Xshape = { 35, 35, 30, 5 };
     
 
-    backcolor = {backcolor.x + 10, backcolor.y +  10, 330, 270};
+    backcolor = { 10, 10, 330, 270};
     journeyButton = { settingsButton.x + 50, settingsButton.y + 50, 210, 55 };
     rankingButton = { journeyButton.x +0, journeyButton.y + 110, 210, 55 };
 }
@@ -45,19 +46,19 @@ void SettingsButton::Draw() {
 void SettingsButton::DrawSetting(){
     
     // draw depending what is the value of the isSettingOpen
+    if(!isSettingsOpen){
         DrawRectangleRec(settingsButton, isSettingsOpen ? RED: BLACK);
         DrawText("-", settingsButton.x + 11, settingsButton.y + 1, 20, WHITE);
         DrawText("-", settingsButton.x + 11, settingsButton.y + 6, 20, WHITE);
         DrawText("-", settingsButton.x + 11, settingsButton.y + 11 , 20, WHITE);
 
-    
+    }
     // if Setting is true this will run
     if (isSettingsOpen) { 
         DrawRectangleRounded(backcolor, 0.1, 10, Fade(WHITE, 0.5f));
-        DrawRectangleRec(settingsButton, isSettingsOpen ? RED: BLACK);
-        DrawText("-", settingsButton.x + 11, settingsButton.y + 1, 20, WHITE);
-        DrawText("-", settingsButton.x + 11, settingsButton.y + 6, 20, WHITE);
-        DrawText("-", settingsButton.x + 11, settingsButton.y + 11 , 20, WHITE);
+        DrawRectanglePro(Xshape, Vector2{ Xshape.width / 2, Xshape.height / 2 }, 45, BLACK);
+        DrawRectanglePro(Xshape, Vector2{ Xshape.width / 2, Xshape.height / 2 }, -45, BLACK);
+
 
         DrawRectangleRec(journeyButton,Fade(WHITE,0.0f)); 
         DrawText("Journey", journeyButton.x + 10, journeyButton.y + 10, 44, BLACK);
@@ -68,6 +69,7 @@ void SettingsButton::DrawSetting(){
         DrawText("Ranking", rankingButton.x + 10, rankingButton.y + 10, 44, BLACK);
         DrawRectangle(settingsButton.x,rankingButton.y+60 , 310,2,BLACK);
     }
+    
 }
 
 void SettingsButton::Drawlanguage() {
