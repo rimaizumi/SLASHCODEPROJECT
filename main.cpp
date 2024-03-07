@@ -1,6 +1,7 @@
 #include "raylib.h"
 #include "Animation.h"
 #include "GameDesign.h"
+#include "Question.h"
 #include <iostream>
 using namespace std;
 
@@ -12,6 +13,7 @@ int main()
     const int screenHeight = 1024;
     string userInput = "";
     SettingsButton settingsButton;
+    Question questionInstance;
     
     
 
@@ -91,15 +93,16 @@ int main()
                 settingsButton.Update();
             } break;
 
+
             case slashcode:{
-                      if (IsKeyPressed(KEY_ENTER) || IsGestureDetected(GESTURE_TAP))
-                {
-                    currentScreen = Ending;
-                }
-
-
+              if (IsKeyPressed(KEY_ENTER))
+            {
+                currentScreen = Ending;
+            }
             }break;
-          
+            questionInstance.Update();
+            questionInstance.checkQuestionAndAnswer();
+            
 
             case Ending:
             {
@@ -157,7 +160,11 @@ int main()
                 } break;
 
                 case slashcode:{
+    
                     settingsButton.DrawSlashcode();
+                    questionInstance.drawTextBox();
+                    questionInstance.drawUserInput();
+                    questionInstance.drawResultBox();
 
                 }break;
 

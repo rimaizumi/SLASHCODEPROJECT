@@ -28,6 +28,8 @@ SettingsButton::SettingsButton() {
 
 
 
+
+
 void SettingsButton::Update() {
 
 
@@ -51,6 +53,8 @@ void SettingsButton::Update() {
         
     }
 }
+
+
 
 void SettingsButton::Draw() {
 
@@ -109,7 +113,6 @@ void SettingsButton::Drawlanguage() {
 }
 void SettingsButton::DrawSlashcode() {
 
-    //design
     DrawRectangle(0, 0, 1440, 1024,WHITE);
     DrawRectangle(0, 512, 1440, 1024,DARKGRAY);
     DrawRectangle(0, 512, 1440, 40 ,BLACK);

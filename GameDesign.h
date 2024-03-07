@@ -12,6 +12,7 @@ public:
     void DrawSetting();
     void Drawlanguage();
     void DrawSlashcode();
+
     bool isSettingsOpen1;
     
 
@@ -32,4 +33,5 @@ private:
     Rectangle Xshape;
     Rectangle Xshape1;
     Rectangle Xshape1_Collision;
+
 };
