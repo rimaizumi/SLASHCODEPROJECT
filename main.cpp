@@ -13,6 +13,7 @@ int main()
     const int screenHeight = 1024;
     string userInput = "";
     SettingsButton settingsButton;
+    
    
 
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
@@ -59,18 +60,15 @@ int main()
             {
                 // TODO: Update GAMEPLAY screen variables here!
 
-
                 // Press enter to change to ENDING screen
-                Rectangle collision_position = { 344, 293, 764, 219 };
+            Rectangle collision_position = { 344, 293, 764, 219 };
                 
-                if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
-                    
-
-                    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-                        
-                        currentScreen = Game_language;
-                    }
-                } 
+             if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
+                 // isSettingOpen1 prevent the Beginner button to be press pag nasa setting mode
+                if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {          
+                    currentScreen = Game_language;
+                }
+            } 
 
                 settingsButton.Update();
                
@@ -84,8 +82,8 @@ int main()
                 
                 if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
                     
-
-                    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+                    // isSettingOpen1 prevent the python button to be press pag nasa setting mode
+                    if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
                         
                         currentScreen = slashcode;
                     }
@@ -144,13 +142,11 @@ int main()
                 {
                     // TODO: Draw GAMEPLAY screen here!
                     //background
+                    
                     DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+                    
                     settingsButton.Draw();
                     settingsButton.DrawSetting();
-                    
-
-                   
-                    
        
                 } break;
 

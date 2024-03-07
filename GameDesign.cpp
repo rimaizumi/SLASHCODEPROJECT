@@ -1,5 +1,6 @@
 #include "GameDesign.h"
-
+typedef enum GAMESCREEN { Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
+GAMESCREEN currentScreen = Gameplay;
 // constractor
 SettingsButton::SettingsButton() {
     // initialize
@@ -9,27 +10,42 @@ SettingsButton::SettingsButton() {
     //setting button
     settingsButton = { 20, 20, 30, 30 };
     isSettingsOpen = false;
+    isSettingsOpen1 = true;
+    isjourneypressed = false;
     Xshape = { 35, 35, 30, 5 };
+    Xshape1 = { 510, 242, 30, 5 };
+    Xshape1_Collision = { 495, 230, 30, 30 };
     
 
     backcolor = { 10, 10, 330, 270};
+    journey = { 480, 212, 500, 500};
     journeyButton = { settingsButton.x + 50, settingsButton.y + 50, 210, 55 };
     rankingButton = { journeyButton.x +0, journeyButton.y + 110, 210, 55 };
 }
 
+
+
 void SettingsButton::Update() {
+
+
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         Vector2 mousePos = GetMousePosition();
         // gagawing true yung issettingbutton
         if (CheckCollisionPointRec(mousePos, settingsButton)) {
             isSettingsOpen = !isSettingsOpen;
+            isSettingsOpen1 = !isSettingsOpen1;
         } else if (isSettingsOpen && CheckCollisionPointRec(mousePos, journeyButton)) {
             // Handle Journey button click
-            // Add your action here
+            isjourneypressed = !isjourneypressed;
+            
         } else if (isSettingsOpen && CheckCollisionPointRec(mousePos, rankingButton)) {
             // Handle Ranking button click
-            // Add your action here
+            isjourneypressed = !isjourneypressed;
         }
+        else if (isjourneypressed && CheckCollisionPointRec(mousePos, Xshape1_Collision)) {
+            isjourneypressed = !isjourneypressed;
+        }
+        
     }
 }
 
@@ -58,8 +74,6 @@ void SettingsButton::DrawSetting(){
         DrawRectangleRounded(backcolor, 0.1, 10, Fade(WHITE, 0.5f));
         DrawRectanglePro(Xshape, Vector2{ Xshape.width / 2, Xshape.height / 2 }, 45, BLACK);
         DrawRectanglePro(Xshape, Vector2{ Xshape.width / 2, Xshape.height / 2 }, -45, BLACK);
-
-
         DrawRectangleRec(journeyButton,Fade(WHITE,0.0f)); 
         DrawText("Journey", journeyButton.x + 10, journeyButton.y + 10, 44, BLACK);
 
@@ -68,10 +82,18 @@ void SettingsButton::DrawSetting(){
         DrawRectangleRec(rankingButton, Fade(WHITE,0.0f)); 
         DrawText("Ranking", rankingButton.x + 10, rankingButton.y + 10, 44, BLACK);
         DrawRectangle(settingsButton.x,rankingButton.y+60 , 310,2,BLACK);
-    }
-    
-}
 
+        if(isjourneypressed){
+            DrawRectangleRounded(journey, 0.1, 10 , WHITE);
+            DrawText("This feature is", journey.x + 65, journey.y + 166, 32 , BLACK);
+            DrawText("Temporary Unavailable", journey.x + 65, journey.y + 200, 32 , BLACK);
+            DrawRectanglePro(Xshape1, Vector2{ Xshape.width / 2, Xshape.height / 2 }, 45, BLACK);
+            DrawRectanglePro(Xshape1, Vector2{ Xshape.width / 2, Xshape.height / 2 }, -45, BLACK);
+            DrawRectangleRec(Xshape1_Collision,Fade(BLACK,0.0f));    
+
+        }
+    }
+}
 void SettingsButton::Drawlanguage() {
 
     //design

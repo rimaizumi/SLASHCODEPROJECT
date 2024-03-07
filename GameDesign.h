@@ -12,7 +12,7 @@ public:
     void DrawSetting();
     void Drawlanguage();
     void DrawSlashcode();
-  
+    bool isSettingsOpen1;
     
 
 private:
@@ -22,12 +22,15 @@ private:
 
     Rectangle roundedRect;
     Rectangle buttonRect1;
-
+    bool isSettingsOpen;
     //setting button
     Rectangle settingsButton;
-    bool isSettingsOpen;
+    bool isjourneypressed;
+    Rectangle journey;
     Rectangle backcolor;
     Rectangle journeyButton;
     Rectangle rankingButton;
     Rectangle Xshape;
+    Rectangle Xshape1;
+    Rectangle Xshape1_Collision;
 };
