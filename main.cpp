@@ -1,9 +1,7 @@
 #include "raylib.h"
 #include "Animation.h"
 #include "GameDesign.h"
-#include "Question.h"
 #include <iostream>
-#include "Question.h"
 using namespace std;
 
 typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
@@ -14,7 +12,7 @@ int main()
     const int screenHeight = 1024;
     string userInput = "";
     SettingsButton settingsButton;
-    Question question;
+    
     
 
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
@@ -99,8 +97,6 @@ int main()
                     currentScreen = Ending;
                 }
 
-                question.Update();
-                question.checkQuestionAndAnswer();
 
             }break;
           
@@ -162,9 +158,6 @@ int main()
 
                 case slashcode:{
                     settingsButton.DrawSlashcode();
-                    question.drawTextBox();
-                    question.drawUserInput();
-                    question.drawResultBox();
 
                 }break;
 
