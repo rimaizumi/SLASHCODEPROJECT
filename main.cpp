@@ -1,21 +1,27 @@
 #include "raylib.h"
 #include "Animation.h"
+
 #include "GameDesign.h"
 #include "Question.h"
 #include <iostream>
 using namespace std;
 
 typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
+
+
 int main()
 {
     // Initialization
     const int screenWidth = 1440;
     const int screenHeight = 1024;
+
     string userInput = "";
     SettingsButton settingsButton;
     Question questionInstance;
     
     
+
+
 
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
     SetTargetFPS(60);
@@ -62,18 +68,21 @@ int main()
                 // TODO: Update GAMEPLAY screen variables here!
 
                 // Press enter to change to ENDING screen
+
             Rectangle collision_position = { 344, 293, 764, 219 };
                 
              if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
                  // isSettingOpen1 prevent the Beginner button to be press pag nasa setting mode
                 if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {          
                     currentScreen = Game_language;
+
                 }
             } 
 
                 settingsButton.Update();
                
             } break;
+
 
              case Game_language:
             {
@@ -103,6 +112,8 @@ int main()
             questionInstance.Update();
             questionInstance.checkQuestionAndAnswer();
             
+
+
 
             case Ending:
             {
@@ -145,17 +156,23 @@ int main()
                     // TODO: Draw GAMEPLAY screen here!
                     //background
                     DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+
                     settingsButton.Draw();
                     settingsButton.DrawSetting();
-       
+
                 } break;
 
                  case Game_language:
                 {
                     // TODO: Draw GAMEPLAY screen here!
+
                     DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
                     settingsButton.Drawlanguage();
                     settingsButton.DrawSetting(); 
+
+
+            
+
 
                 } break;
 
