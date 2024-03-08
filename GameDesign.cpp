@@ -129,7 +129,9 @@ void SettingsButton::DrawSlashcode() {
     DrawRectangle(405,512,190,38,DARKGRAY);
     DrawRectangle(1050,512,190,38,DARKGRAY);
     DrawText("ACTIVITY",10 , 518, 30, WHITE);
+
     DrawText("Main.py",430 , 518, 30, WHITE);
+    DrawText("(\" ", 510,565,30, WHITE);
     DrawText("OUTPUT",1070 , 518, 30, WHITE);
     DrawText("In Python, the print function is used to output ", 10, 565, 16, WHITE);
     DrawText("information to the console or terminal. It allows ", 10, 590, 16, WHITE);   

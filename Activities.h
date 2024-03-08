@@ -4,17 +4,22 @@
 
 class Activity{
     public:
+    typedef enum QuestionState { question1 = 0, question2, question3, question4 } QuestionState;
         Activity();
         void Input();
         void DrawInputBox();
         void CheckAnswer();
-        bool IsButtonPressed(Rectangle button);
+       
 
     private:
         Rectangle inputBox;
-        bool type;
-        std::string displayText;
-        int textWidth;
-        std::string userInput;
+        Rectangle inputBox1;
         std::string strAnswer;
+        Rectangle RunButton;
+        Vector2 vertex1;
+        Vector2 vertex2; 
+        Vector2 vertex3; 
+        bool showButton; 
+        bool inputBoxSelected;
+        bool inputBoxSelected1;
 };

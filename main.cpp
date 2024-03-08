@@ -1,6 +1,6 @@
 #include "raylib.h"
 #include "Animation.h"
-
+#include "UserInput.h"
 #include "GameDesign.h"
 #include "Activities.h"
 #include <iostream>
@@ -15,7 +15,6 @@ int main()
     const int screenWidth = 1440;
     const int screenHeight = 1024;
 
-    string userInput = "";
     SettingsButton settingsButton;
     Activity activity;
 
@@ -106,9 +105,8 @@ int main()
                 {
                     currentScreen = Ending;
                 } 
-                activity.Input();
-                
 
+                activity.CheckAnswer();
 
             }break;           
   //----------------Slashcode function end------------------------------------------------------------------
@@ -180,9 +178,7 @@ int main()
                     
                     settingsButton.DrawSlashcode();
                     activity.DrawInputBox();
-                    activity.CheckAnswer(); 
-
-                    
+   
                         
                 }break;
 
