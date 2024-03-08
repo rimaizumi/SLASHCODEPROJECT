@@ -28,7 +28,8 @@ int main()
 
     SetTargetFPS(60);
     
-    Rectangle inputBox = {420, 560, 100, 40};
+    Rectangle nextButton = {600, 700, 120, 40};
+    Rectangle tryAgainButton = {600, 700, 160, 40};
     // Main game loop
     while (!WindowShouldClose())
     {
@@ -108,6 +109,15 @@ int main()
                 } 
                 activity.Input(); 
 
+
+            if (activity.IsButtonPressed(nextButton)) {
+                // Trigger Next button action
+                activity.CheckAnswer();
+            } else if (activity.IsButtonPressed(tryAgainButton)) {
+                // Trigger Try Again button action
+                activity.CheckAnswer();
+            }
+
             }break;           
   //----------------Slashcode function end------------------------------------------------------------------
 
@@ -178,6 +188,12 @@ int main()
                     
                     settingsButton.DrawSlashcode();
                     activity.DrawInputBox();
+                    // Draw buttons
+                    DrawRectangleRounded(nextButton, 0.1, 10, BLUE);
+                    DrawText("Next", 630, 710, 20, WHITE);
+
+                    DrawRectangleRounded(tryAgainButton, 0.1, 10, BLUE);
+                    DrawText("Try Again", 620, 710, 20, WHITE);
                     
                         
                 }break;

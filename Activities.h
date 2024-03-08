@@ -7,6 +7,8 @@ class Activity{
         Activity();
         void Input();
         void DrawInputBox();
+        void CheckAnswer();
+        bool IsButtonPressed(Rectangle button);
 
     private:
         Rectangle inputBox;
@@ -14,4 +16,5 @@ class Activity{
         std::string displayText;
         int textWidth;
         std::string userInput;
+        std::string strAnswer;
 };

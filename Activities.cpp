@@ -3,6 +3,8 @@
 Activity::Activity(){
     type = false;
     inputBox  = {420, 560, 90, 40};
+    strAnswer = "print";
+    
 }
 
 
@@ -56,4 +58,19 @@ void Activity::DrawInputBox(){
     DrawRectangleRounded(inputBox, 0.1, 10, WHITE);
     DrawText(userInput.c_str(), inputBox.x + 5, inputBox.y + 5, 20, BLACK);
                
+}
+
+void Activity::CheckAnswer() {
+    if (userInput == strAnswer) {
+        // Correct answer
+        DrawText("Correct!", 600, 650, 30, GREEN);
+    } else {
+        // Incorrect answer
+        DrawText("Incorrect!", 600, 650, 30, RED);
+    }
+}
+
+bool Activity::IsButtonPressed(Rectangle button) {
+    Vector2 mousePos = GetMousePosition();
+    return CheckCollisionPointRec(mousePos, button) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
 }
