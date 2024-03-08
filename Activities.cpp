@@ -61,16 +61,15 @@ void Activity::DrawInputBox(){
 }
 
 void Activity::CheckAnswer() {
-    if (userInput == strAnswer) {
-        // Correct answer
-        DrawText("Correct!", 600, 650, 30, GREEN);
-    } else {
-        // Incorrect answer
-        DrawText("Incorrect!", 600, 650, 30, RED);
+    if(IsKeyPressed(KEY_F10)){
+
+        if (userInput == strAnswer) {
+            // Correct answer
+            DrawText("Correct!", 600, 200, 30, GREEN);
+        } else {
+            // Incorrect answer
+            DrawText("Incorrect!", 600, 650, 30, RED);
+        }
     }
 }
 
-bool Activity::IsButtonPressed(Rectangle button) {
-    Vector2 mousePos = GetMousePosition();
-    return CheckCollisionPointRec(mousePos, button) && IsMouseButtonPressed(MOUSE_LEFT_BUTTON);
-}
