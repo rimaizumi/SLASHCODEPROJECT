@@ -1,21 +1,24 @@
 #include "raylib.h"
 #include "Animation.h"
+#include "UserInput.h"
 #include "GameDesign.h"
-#include "Question.h"
+#include "Activities.h"
 #include <iostream>
+
+
 using namespace std;
 
 typedef enum GAMESCREEN {Logo = 0, Title, Menu, Gameplay,Game_language, slashcode, Ending} GAMESCREEN;
+
+
 int main()
 {
     // Initialization
     const int screenWidth = 1440;
     const int screenHeight = 1024;
-    string userInput = "";
+
     SettingsButton settingsButton;
-    Question questionInstance;
-    
-    
+    Activity activity;
 
     InitWindow(screenWidth, screenHeight, "Project: Slash Code (ALPHA)");
     SetTargetFPS(60);
@@ -30,6 +33,7 @@ int main()
     // Main game loop
     while (!WindowShouldClose())
     {
+
         
         switch(currentScreen)
         {
@@ -62,18 +66,21 @@ int main()
                 // TODO: Update GAMEPLAY screen variables here!
 
                 // Press enter to change to ENDING screen
+
             Rectangle collision_position = { 344, 293, 764, 219 };
                 
              if (CheckCollisionPointRec(GetMousePosition(), collision_position)) {
                  // isSettingOpen1 prevent the Beginner button to be press pag nasa setting mode
                 if (settingsButton.isSettingsOpen1 && IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {          
                     currentScreen = Game_language;
+
                 }
             } 
 
                 settingsButton.Update();
                
             } break;
+
 
              case Game_language:
             {
@@ -93,16 +100,21 @@ int main()
                 settingsButton.Update();
             } break;
 
-
+        // SLASHCODE main feature
+        //----------------------------------------------------------------------------------
             case slashcode:{
-              if (IsKeyPressed(KEY_ENTER))
-            {
-                currentScreen = Ending;
-            }
-            }break;
-            questionInstance.Update();
-            questionInstance.checkQuestionAndAnswer();
-            
+
+                if (IsKeyPressed(KEY_ESCAPE))
+                {
+                    currentScreen = Ending;
+                } 
+                activity.CheckAnswer();
+
+
+            }break;           
+  //----------------Slashcode function end------------------------------------------------------------------
+
+
 
             case Ending:
             {
@@ -129,7 +141,7 @@ int main()
                 case Logo:
                 {
                     // TODO: Draw LOGO screen here!
-                    DrawText("LOGO SCREEN", 20, 20, 40, LIGHTGRAY);
+                    DrawText("LOGO SCREEN", 20, 20, 40, DARKBLUE);
                     DrawText("WAIT for 2 SECONDS...", 290, 220, 20, GRAY);
 
                 } break;
@@ -144,28 +156,34 @@ int main()
                 {
                     // TODO: Draw GAMEPLAY screen here!
                     //background
-                    DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+                    DrawRectangle(0, 0, screenWidth, screenHeight,DARKBLUE);
+
                     settingsButton.Draw();
                     settingsButton.DrawSetting();
-       
+
                 } break;
 
                  case Game_language:
                 {
                     // TODO: Draw GAMEPLAY screen here!
-                    DrawRectangle(0, 0, screenWidth, screenHeight,GRAY);
+
+                    DrawRectangle(0, 0, screenWidth, screenHeight,DARKBLUE);
                     settingsButton.Drawlanguage();
                     settingsButton.DrawSetting(); 
+
+
+            
+
 
                 } break;
 
                 case slashcode:{
-    
-                    settingsButton.DrawSlashcode();
-                    questionInstance.drawTextBox();
-                    questionInstance.drawUserInput();
-                    questionInstance.drawResultBox();
 
+                    settingsButton.DrawSlashcodeBase();
+                    activity.DrawInputBox();
+
+   
+                        
                 }break;
 
                 case Ending:

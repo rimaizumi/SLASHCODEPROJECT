@@ -22,5 +22,5 @@ public:
     void Update();
     void drawUserInput();
     void checkQuestionAndAnswer();
-
+    QuestionState currentQuestion = question1;
 };

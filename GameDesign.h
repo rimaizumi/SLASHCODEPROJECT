@@ -1,5 +1,7 @@
 
 #include "raylib.h"
+#include <string>
+#include <algorithm>
 
 class SettingsButton {
 public:
@@ -12,9 +14,10 @@ public:
     void DrawSetting();
     void Drawlanguage();
     void DrawSlashcode();
-
+    void DrawSlashcodeBase();
+    void UpdateInput();
     bool isSettingsOpen1;
-    
+    std:: string userInput;
 
 private:
     // variables
@@ -33,5 +36,6 @@ private:
     Rectangle Xshape;
     Rectangle Xshape1;
     Rectangle Xshape1_Collision;
+    
 
 };
