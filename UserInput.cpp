@@ -9,7 +9,7 @@ UserInput::UserInput(){
     //input2
     type2 = false;
     userInput2 = "";
-    inputBox1  = {420, 560, 130, 40};
+    inputBox2  = {420, 560, 160, 40};
     
 }
 
@@ -55,46 +55,38 @@ void UserInput::Input() {
 //-----------------------------------------------------------------------------------------------
 void UserInput::Input2() {
     // make the shift not toggle
-    if (IsKeyDown(KEY_LEFT_SHIFT) || IsKeyDown(KEY_RIGHT_SHIFT)) {
-        type2 = true;
-    } else {
-        type2 = false;
-    }
+        if (CheckCollisionPointRec(GetMousePosition(), inputBox))mouseOnText = true;
+        else mouseOnText = false;
+        std::string displayText2 = (type ? "[Caps]" : "[Lower]") + userInput2;
 
-    std::string displayText2 = (type2 ? "[Caps]" : "[Lower]") + userInput2;
+        if (mouseOnText)
+        {
+            int key = GetCharPressed();
+            // Check if more characters have been pressed on the same frame
+            while (key > 0)
+            {
+                // NOTE: Only allow keys in range [32..125]
+                if ((key >= 32) && (key <= 125))
+                {
+                    userInput2 += (char)key;
 
-    int key2 = GetKeyPressed();
-    while (key2 > 0) {
-        // Check if the key is a letter, number, or symbol and modify the input accordingly
-        if (((key2 >= 'A' && key2 <= 'Z') || (key2 >= 'a' && key2 <= 'z') || 
-             (key2 >= '0' && key2 <= '9')) && (userInput2.size() < 255)) {
-            if (type2) {
-                // Convert to uppercase if the flag is set
-                userInput2 += (char)toupper(key2);
-            } else {
-                // Convert to lowercase if the flag is not set
-                userInput2 += (char)tolower(key2);
+                }
+
+                key = GetCharPressed();  // Check next character in the queue
             }
-        } else if (key2 >= 32 && key2 <= 126) {
-            // Include symbols if they are printable characters
-            userInput2 += (char)key2;
+
+            if (IsKeyPressed(KEY_BACKSPACE) && !userInput2.empty()) {
+                userInput2.pop_back();
+            }
+  
+            }
+            int textWidth2 = MeasureText(displayText2.c_str(), 20);
+            while (textWidth2 > inputBox2.width + 50) { // Assuming the white box has a width of 200
+            userInput2.pop_back();
+            displayText2 = (type ? "[Caps]" : "[Lower]") + userInput2;
+            textWidth2 = MeasureText(displayText2.c_str(), 20);
         }
 
-        key2 = GetKeyPressed();
-    }
-
-    // Handle backspace
-    if (IsKeyPressed(KEY_BACKSPACE) && !userInput2.empty()) {
-        userInput2.pop_back();
-    }
-
-    int textWidth2 = MeasureText(displayText2.c_str(), 20);
-    while (textWidth2 > inputBox1.width + 65) { // Assuming the white box has a width of 200
-        userInput2.pop_back();
-        displayText2 = (type ? "[Caps]" : "[Lower]") + userInput2;
-        textWidth2 = MeasureText(displayText2.c_str(), 20);
-    }
-    
 }
 
 

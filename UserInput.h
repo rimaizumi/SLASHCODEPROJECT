@@ -23,6 +23,6 @@ class UserInput{
     Rectangle inputBox;
     std::string userInput2;
     bool type2;
-    Rectangle inputBox1;
+    Rectangle inputBox2;
     ;
 };
